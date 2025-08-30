@@ -167,11 +167,12 @@ class AmazonProductScraper(Scraper):
             try:
                 self.data = self.parse_response()
                 if self.data:  # Only save if we have data
+                    file_name = f"{self.product_sku}.json"
                     with open(
-                        f"{self.product_sku}.json", "w", encoding="utf-8"
+                        file_name, "w", encoding="utf-8"
                     ) as json_file:
                         json.dump(self.data, json_file, ensure_ascii=False, indent=2)
-                    print(f"Data saved to {self.product_sku}.json")
+                    print(f"Data saved to {file_name}")
                 else:
                     print(f"No data extracted for product SKU: {self.product_sku}")
             except Exception as e:
